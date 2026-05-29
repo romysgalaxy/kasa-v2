@@ -1,43 +1,131 @@
 .main {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 1.5rem 3rem;
 }
 
-.title {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 1rem 0 2rem;
+}
+
+.heroTitle {
+  color: var(--brand-strong);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.heroText {
+  max-width: 640px;
+  margin: 0 auto 1.75rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.bannerImg {
+  object-fit: cover;
+}
+
+/* Grille de logements */
 .grid {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
+  grid-template-columns: 1fr;
 }
 
-.card {
+/* Comment ça marche */
+.steps {
+  margin-top: 3rem;
+  background: #fff;
+  border-radius: 20px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+}
+
+.stepsTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.stepsText {
+  max-width: 620px;
+  margin: 0 auto 2rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.stepsGrid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+
+.stepCard {
+  background: #8b3a2b;
+  color: #fff;
   border-radius: 12px;
-  overflow: hidden;
-  background: #f6f6f6;
+  padding: 1.5rem;
+  text-align: left;
 }
 
-.cover {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  display: block;
-}
-
-.cardTitle {
+.stepCardTitle {
   font-size: 1.1rem;
-  margin: 0.75rem 1rem 0.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
-.location {
-  margin: 0 1rem 1rem;
-  color: #555;
+.stepCardText {
   font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .banner {
+    aspect-ratio: 3 / 1;
+  }
+
+  .stepsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
