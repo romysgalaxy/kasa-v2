@@ -1,0 +1,146 @@
+.header {
+  position: relative;
+  max-width: 1240px;
+  margin: 1.25rem auto;
+  padding: 0 1rem;
+}
+
+.bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.25rem;
+}
+
+.link {
+  font-weight: 500;
+  color: var(--foreground);
+  transition: color 0.15s ease;
+}
+
+.link:hover {
+  color: var(--brand);
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+}
+
+.logoFull {
+  height: 38px;
+  width: auto;
+}
+
+.logoMini {
+  display: none;
+  height: 38px;
+  width: auto;
+}
+
+.add {
+  color: var(--brand);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.icon {
+  display: inline-flex;
+  color: var(--brand);
+  transition: opacity 0.15s ease;
+}
+
+.icon:hover {
+  opacity: 0.7;
+}
+
+.burger {
+  display: none;
+  border: none;
+  background: none;
+  color: var(--brand);
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.mobileMenu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .header {
+    margin: 0.75rem;
+    padding: 0;
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+  }
+
+  .left,
+  .right {
+    display: none;
+  }
+
+  .logoFull {
+    display: none;
+  }
+
+  .logoMini {
+    display: block;
+  }
+
+  .logo {
+    justify-content: flex-start;
+  }
+
+  .burger {
+    display: inline-flex;
+  }
+
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+  }
+
+  .mobileLink {
+    padding: 0.9rem 1.25rem;
+    font-weight: 500;
+    color: var(--foreground);
+    border-bottom: 1px solid #f0f0f0;
+    transition: color 0.15s ease;
+  }
+
+  .mobileLink:last-child {
+    border-bottom: none;
+  }
+
+  .mobileLink:hover {
+    color: var(--brand);
+  }
+}
