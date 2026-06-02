@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProperty } from "@/lib/api";
+import Gallery from "@/components/Gallery";
 import styles from "./page.module.css";
 
 export async function generateMetadata({ params }) {
@@ -22,7 +23,6 @@ export default async function LogementPage({ params }) {
   const pictures = (
     property.pictures?.length ? property.pictures : [property.cover]
   ).filter(Boolean);
-  const gallery = pictures.slice(0, 5);
 
   return (
     <main className={styles.main}>
@@ -32,23 +32,7 @@ export default async function LogementPage({ params }) {
 
       <div className={styles.layout}>
         <div className={styles.content}>
-          <section className={styles.gallery} aria-label="Photos du logement">
-            {gallery.map((src, i) => (
-              <div
-                key={i}
-                className={i === 0 ? styles.galleryBig : styles.galleryItem}
-              >
-                <Image
-                  src={src}
-                  alt={`${property.title} — photo ${i + 1}`}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                  className={styles.galleryImg}
-                  priority={i === 0}
-                />
-              </div>
-            ))}
-          </section>
+          <Gallery images={pictures} title={property.title} />
 
           <section className={styles.infos}>
             <h1 className={styles.title}>{property.title}</h1>

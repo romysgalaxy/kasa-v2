@@ -1,0 +1,75 @@
+/* Mobile d'abord : grande image en haut, puis 4 petites en ligne (1x4). */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.big,
+.thumb {
+  position: relative;
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #eee;
+}
+
+.big {
+  grid-column: 1 / -1;
+  aspect-ratio: 3 / 2;
+}
+
+.thumb {
+  aspect-ratio: 1 / 1;
+}
+
+.img {
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.big:hover .img,
+.thumb:hover .img {
+  transform: scale(1.04);
+}
+
+.big:focus-visible,
+.thumb:focus-visible {
+  outline: 3px solid var(--brand-strong, #8b3a2b);
+  outline-offset: 2px;
+}
+
+/* Badge "+N" sur la dernière vignette quand il reste des photos. */
+.more {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* Desktop : grande image à gauche (2 lignes), 4 vignettes en 2x2 à droite. */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 400px;
+    gap: 0.6rem;
+  }
+
+  .big {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    aspect-ratio: auto;
+  }
+
+  .thumb {
+    aspect-ratio: auto;
+  }
+}
