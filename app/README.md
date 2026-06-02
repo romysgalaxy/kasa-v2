@@ -20,6 +20,17 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Tests
+
+Les tests unitaires utilisent [Vitest](https://vitest.dev) et [Testing Library](https://testing-library.com).
+
+```bash
+npm test          # lance tous les tests une fois
+npm run test:watch # mode interactif (re-lance au changement)
+```
+
+Les tests sont placés à côté des composants (`*.test.js`).
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

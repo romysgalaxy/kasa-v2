@@ -50,7 +50,11 @@ export default function Carousel({ images, title, initialIndex = 0, onClose }) {
       role="dialog"
       aria-modal="true"
       aria-label={`Galerie photos — ${title}`}
-      onClick={onClose}
+      // Ne ferme que si on clique sur le fond lui-même, pas sur un enfant
+      // (image, flèches, bouton fermer).
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose?.();
+      }}
     >
       <button
         ref={closeRef}
@@ -64,8 +68,7 @@ export default function Carousel({ images, title, initialIndex = 0, onClose }) {
         </svg>
       </button>
 
-      {/* stopPropagation : un clic sur le visuel ne ferme pas la lightbox */}
-      <div className={styles.stage} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.stage}>
         <div className={styles.slide}>
           <Image
             src={images[index]}
