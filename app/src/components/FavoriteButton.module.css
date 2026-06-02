@@ -10,13 +10,19 @@
   justify-content: center;
   border: none;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.9);
+  background: #f1f1f1;
   color: #6f6f6f;
   cursor: pointer;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
-  transition: transform 0.12s ease;
+  transition: transform 0.12s ease, background 0.15s ease, color 0.15s ease;
 }
 
 .button:hover {
   transform: scale(1.05);
+}
+
+/* Logement en favori : carré marron, cœur blanc. */
+.active {
+  background: var(--brand-strong);
+  color: #fff;
 }

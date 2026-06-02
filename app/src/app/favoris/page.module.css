@@ -1,0 +1,64 @@
+/* Mêmes marges que la page d'accueil. width: 100% car <body> est un conteneur
+   flex en colonne : sans ça, le <main> se rétracte sur son contenu au lieu de
+   remplir la largeur (plafonnée à 1240px). */
+.main {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+}
+
+.intro {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.title {
+  color: var(--brand-strong);
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Même grille que la page d'accueil : 1 colonne en mobile, 2 puis 3 en desktop.
+   Avec repeat(N, 1fr), une carte seule occupe 1/N de la largeur (alignée à
+   gauche), elle ne s'étire pas sur toute la ligne. */
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* État vide */
+.empty {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.emptyText {
+  color: var(--muted);
+  font-size: 1rem;
+}

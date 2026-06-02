@@ -20,7 +20,7 @@ export default function PropertyCard({ property }) {
             />
           )}
         </Link>
-        <FavoriteButton label={property.title} />
+        <FavoriteButton property={property} />
       </div>
 
       <Link href={href} className={styles.body}>
