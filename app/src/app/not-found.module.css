@@ -1,0 +1,54 @@
+/* width: 100% car <body> est un conteneur flex en colonne (sinon le <main> se
+   rétracte sur son contenu). flex-grow: 1 pour pousser le footer en bas même
+   avec peu de contenu. */
+.main {
+  flex: 1;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.code {
+  color: #8b3a2b;
+  font-size: clamp(5rem, 18vw, 9rem);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+
+.message {
+  color: var(--foreground);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 360px;
+  margin-bottom: 2.5rem;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 280px;
+}
+
+.button {
+  display: block;
+  background: #8b3a2b;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0.85rem 1.5rem;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+
+.button:hover {
+  background: var(--brand-strong);
+}
