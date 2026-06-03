@@ -1,4 +1,9 @@
+/* width: 100% car <body> est un conteneur flex en colonne : sans ça, le <main>
+   se rétracte sur son contenu au lieu de remplir la largeur (plafonnée à
+   1240px). Indispensable pour que le bandeau hero ait la même largeur que sur
+   la page à propos. */
 .main {
+  width: 100%;
   max-width: 1240px;
   margin: 0 auto;
   padding: 0 1.5rem 3rem;
@@ -37,10 +42,11 @@
   line-height: 1.5;
 }
 
+/* Sur mobile, même hauteur que l'image portrait de la page à propos (4/5). */
 .banner {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 5;
   border-radius: 20px;
   overflow: hidden;
 }

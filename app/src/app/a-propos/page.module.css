@@ -1,0 +1,103 @@
+/* Mêmes marges que les autres pages. width: 100% car <body> est un conteneur
+   flex en colonne : sans ça, le <main> se rétracte sur son contenu. */
+.main {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+}
+
+.intro {
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 720px;
+}
+
+.title {
+  color: var(--brand-strong);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.lead {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.lead + .lead {
+  margin-top: 1rem;
+}
+
+/* Grande image en bandeau, sous l'introduction. */
+/* Sur mobile, même hauteur que l'image portrait de la section mission (4/5). */
+.banner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.bannerImg {
+  object-fit: cover;
+}
+
+/* Section mission : texte à gauche, image à droite (empilés en mobile). */
+.mission {
+  margin-top: 3rem;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+
+.missionTitle {
+  color: var(--brand-strong);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+.missionList {
+  margin: 0 0 1.5rem 1.25rem;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.missionItem {
+  color: var(--foreground);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  padding-left: 0.25rem;
+}
+
+.highlight {
+  color: var(--brand-strong);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.missionImage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  /* Même effet que le bandeau de la page d'accueil : panoramique sur desktop,
+     16/9 conservé en mobile. */
+  .banner {
+    aspect-ratio: 3 / 1;
+  }
+
+  .mission {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
