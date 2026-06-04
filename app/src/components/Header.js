@@ -5,12 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./Header.module.css";
 
+// href: null = entrée affichée mais non cliquable (fonctionnalité hors
+// périmètre). prefetch: false = page pas encore créée, on évite que Next la
+// précharge (404 en console) tant qu'elle n'existe pas.
 const navLinks = [
   { href: "/", label: "Accueil" },
   { href: "/a-propos", label: "À propos" },
-  { href: "/ajouter-un-logement", label: "Ajouter un logement" },
+  { href: null, label: "Ajouter un logement" },
   { href: "/favoris", label: "Favoris" },
-  { href: "/messagerie", label: "Messagerie" },
+  { href: "/messagerie", label: "Messagerie", prefetch: false },
 ];
 
 function HeartIcon() {
@@ -88,14 +91,14 @@ export default function Header() {
         </Link>
 
         <div className={styles.right}>
-          <Link href="/ajouter-un-logement" className={styles.add}>
-            + Ajouter un logement
-          </Link>
+          {/* Pas un lien : la création de logement est hors périmètre. */}
+          <span className={styles.add}>+ Ajouter un logement</span>
           <Link href="/favoris" className={styles.icon} aria-label="Mes favoris">
             <HeartIcon />
           </Link>
           <Link
             href="/messagerie"
+            prefetch={false}
             className={styles.icon}
             aria-label="Ma messagerie"
           >
@@ -139,16 +142,23 @@ export default function Header() {
 
       {open && (
         <nav id="menu-mobile" className={styles.mobileMenu}>
-          {navLinks.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={styles.mobileLink}
-              onClick={() => setOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navLinks.map((item) =>
+            item.href ? (
+              <Link
+                key={item.label}
+                href={item.href}
+                prefetch={item.prefetch}
+                className={styles.mobileLink}
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <span key={item.label} className={styles.mobileLink}>
+                {item.label}
+              </span>
+            )
+          )}
         </nav>
       )}
     </header>

@@ -36,7 +36,7 @@
 }
 
 .link:hover {
-  color: var(--brand);
+  color: var(--brand-strong);
 }
 
 .logo {
@@ -56,14 +56,14 @@
 }
 
 .add {
-  color: var(--brand);
+  color: var(--brand-strong);
   font-weight: 600;
   white-space: nowrap;
 }
 
 .icon {
   display: inline-flex;
-  color: var(--brand);
+  color: var(--brand-strong);
   transition: opacity 0.15s ease;
 }
 
@@ -75,7 +75,7 @@
   display: none;
   border: none;
   background: none;
-  color: var(--brand);
+  color: var(--brand-strong);
   cursor: pointer;
   padding: 0.25rem;
 }
@@ -141,6 +141,6 @@
   }
 
   .mobileLink:hover {
-    color: var(--brand);
+    color: var(--brand-strong);
   }
 }
