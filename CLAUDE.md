@@ -67,9 +67,10 @@ Uploads go to `api/public/uploads/` (served statically) via `multer`.
 
 Next.js App Router under `app/src/app/`. Path alias `@/*` → `src/*` (`jsconfig.json`).
 
-- Pages are **Server Components** by default and fetch via `lib/api.js`. Routes: `/` (home), `/logement/[id]` (property detail), `/favoris` (favorites). Each route has co-located `loading.js` and `page.module.css`.
+- Pages are **Server Components** by default and fetch via `lib/api.js`. Routes: `/` (home), `/logement/[id]` (property detail), `/favoris` (favorites), `/a-propos` (about), `/connexion` (login). Unknown routes render `app/not-found.js` (custom 404). Each route has a co-located `page.module.css`; loading UI comes from the root `loading.js` (plus a route-level one in `logement/[id]`).
 - Reusable components live in `src/components/` with co-located CSS Modules (`*.module.css`) and tests (`*.test.js`).
 - Favorites are **client-side only**, persisted to `localStorage` under key `kasa:favorites` via `src/context/FavoritesContext.js` (a `"use client"` context provider wrapping the app in `layout.js`). The provider guards hydration (`hydrated` flag) to avoid server/client mismatch — preserve that pattern when editing it.
+- Login session follows the same pattern: `src/context/AuthContext.js` posts to `/auth/login` (through the rewrite) and persists `{ token, user }` to `localStorage` under `kasa:auth`, with the same `hydrated` guard. Only the login endpoint is wired up front-side (register/reset exist in the API but have no UI). A test account exists in the dev DB: `test@kasa.fr` / `Kasa#2026!Test` (created via `POST /auth/register`; recreate it after a DB reset).
 - Styling is plain CSS Modules (no Tailwind). Global styles in `app/globals.css`; font is Montserrat via `next/font/google`.
 
 ### Testing

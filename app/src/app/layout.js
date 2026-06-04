@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { FavoritesProvider } from "@/context/FavoritesContext";
+import { AuthProvider } from "@/context/AuthContext";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -19,11 +20,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr" className={montserrat.className}>
       <body>
-        <FavoritesProvider>
-          <Header />
-          {children}
-          <Footer />
-        </FavoritesProvider>
+        <AuthProvider>
+          <FavoritesProvider>
+            <Header />
+            {children}
+            <Footer />
+          </FavoritesProvider>
+        </AuthProvider>
       </body>
     </html>
   );
