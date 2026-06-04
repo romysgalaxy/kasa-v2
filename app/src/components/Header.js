@@ -6,14 +6,13 @@ import Link from "next/link";
 import styles from "./Header.module.css";
 
 // href: null = entrée affichée mais non cliquable (fonctionnalité hors
-// périmètre). prefetch: false = page pas encore créée, on évite que Next la
-// précharge (404 en console) tant qu'elle n'existe pas.
+// périmètre).
 const navLinks = [
   { href: "/", label: "Accueil" },
   { href: "/a-propos", label: "À propos" },
   { href: null, label: "Ajouter un logement" },
   { href: "/favoris", label: "Favoris" },
-  { href: "/messagerie", label: "Messagerie", prefetch: false },
+  { href: "/messagerie", label: "Messagerie" },
 ];
 
 function HeartIcon() {
@@ -103,7 +102,6 @@ export default function Header() {
           </Link>
           <Link
             href="/messagerie"
-            prefetch={false}
             className={styles.icon}
             aria-label="Ma messagerie"
           >
@@ -152,7 +150,6 @@ export default function Header() {
               <Link
                 key={item.label}
                 href={item.href}
-                prefetch={item.prefetch}
                 className={styles.mobileLink}
                 onClick={() => setOpen(false)}
               >

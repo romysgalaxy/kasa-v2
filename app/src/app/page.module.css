@@ -37,7 +37,7 @@
 .heroText {
   max-width: 640px;
   margin: 0 auto 1.75rem;
-  color: var(--muted);
+  color: var(--foreground);
   font-size: 0.95rem;
   line-height: 1.5;
 }

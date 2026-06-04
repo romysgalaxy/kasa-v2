@@ -21,7 +21,7 @@
 }
 
 .lead {
-  color: var(--muted);
+  color: var(--foreground);
   font-size: 0.95rem;
   line-height: 1.6;
 }

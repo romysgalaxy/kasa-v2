@@ -17,6 +17,7 @@ Le projet est un monorepo composé de deux applications indépendantes (il n'y a
 - **Détail d'un logement** (`/logement/[id]`) — carrousel/lightbox d'images, description, équipements, hôte, note, tags
 - **Favoris** (`/favoris`) — ajout/retrait par le bouton ♥, persistés dans le `localStorage` (aucun compte requis)
 - **Connexion** (`/connexion`) — authentification par email + mot de passe (JWT, hachage scrypt côté API), message d'erreur en cas d'identifiants invalides
+- **Messagerie** (`/messagerie`) — démonstration visuelle (conversations fictives, envoi local) : aucun backend de messagerie n'existe à ce stade
 - **À propos** (`/a-propos`) et **page 404** personnalisée
 
 ### Architecture
