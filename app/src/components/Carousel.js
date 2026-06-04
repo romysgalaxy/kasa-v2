@@ -4,11 +4,23 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import styles from "./Carousel.module.css";
 
+/**
+ * Lightbox plein écran avec navigation circulaire entre les photos.
+ * Accessible : dialog modal, navigation clavier (flèches / Échap), focus
+ * déplacé sur le bouton fermer à l'ouverture, compteur annoncé (aria-live).
+ * @param {Object} props
+ * @param {string[]} props.images - URLs des photos à afficher.
+ * @param {string} props.title - Titre du logement (pour les libellés accessibles).
+ * @param {number} [props.initialIndex=0] - Photo affichée à l'ouverture.
+ * @param {() => void} props.onClose - Callback de fermeture (Échap, clic sur le fond ou bouton ✕).
+ */
 export default function Carousel({ images, title, initialIndex = 0, onClose }) {
   const [index, setIndex] = useState(initialIndex);
   const count = images.length;
   const closeRef = useRef(null);
 
+  // Navigation circulaire : le modulo fait boucler dernière → première photo
+  // (et le `+ count` évite un résultat négatif en reculant depuis l'index 0).
   const prev = useCallback(
     () => setIndex((i) => (i - 1 + count) % count),
     [count]

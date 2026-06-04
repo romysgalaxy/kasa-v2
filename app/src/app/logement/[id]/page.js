@@ -5,6 +5,12 @@ import { getProperty } from "@/lib/api";
 import Gallery from "@/components/Gallery";
 import styles from "./page.module.css";
 
+/**
+ * Métadonnées dynamiques (balise <title> + description) construites à partir
+ * du logement demandé. `params` est une Promise depuis Next 15+ : on l'await.
+ * @param {{params: Promise<{id: string}>}} props
+ * @returns {Promise<import("next").Metadata>}
+ */
 export async function generateMetadata({ params }) {
   const { id } = await params;
   const property = await getProperty(id);
@@ -15,11 +21,18 @@ export async function generateMetadata({ params }) {
   };
 }
 
+/**
+ * Page détail d'un logement (Server Component) : galerie photos, description,
+ * équipements, tags et carte de l'hôte. Affiche la 404 si l'id est inconnu.
+ * @param {{params: Promise<{id: string}>}} props
+ */
 export default async function LogementPage({ params }) {
   const { id } = await params;
   const property = await getProperty(id);
   if (!property) notFound();
 
+  // La galerie attend au moins une image : on retombe sur la photo de
+  // couverture si `pictures` est vide, et filter(Boolean) écarte les nulls.
   const pictures = (
     property.pictures?.length ? property.pictures : [property.cover]
   ).filter(Boolean);

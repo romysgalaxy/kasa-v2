@@ -5,6 +5,14 @@ import Image from "next/image";
 import Carousel from "./Carousel";
 import styles from "./Gallery.module.css";
 
+/**
+ * Galerie de la page logement : une grande photo + jusqu'à 4 vignettes
+ * (avec badge "+N" s'il y a plus de 5 photos). Chaque photo ouvre la
+ * lightbox (Carousel) à l'index cliqué.
+ * @param {Object} props
+ * @param {string[]} props.images - URLs des photos du logement.
+ * @param {string} props.title - Titre du logement (libellés accessibles + alt).
+ */
 export default function Gallery({ images, title }) {
   const [lightbox, setLightbox] = useState(null); // index ouvert, ou null
 

@@ -4,6 +4,11 @@ import PropertyCard from "@/components/PropertyCard";
 import { useFavorites } from "@/context/FavoritesContext";
 import styles from "./page.module.css";
 
+/**
+ * Page favoris : composant client (les données viennent du localStorage via
+ * FavoritesContext, inaccessibles au serveur). Affiche la grille des
+ * logements aimés, ou un message si la liste est vide.
+ */
 export default function FavorisPage() {
   const { favorites, hydrated } = useFavorites();
 

@@ -52,6 +52,11 @@ function MessageIcon() {
   );
 }
 
+/**
+ * En-tête du site : navigation desktop (liens + icônes favoris/messagerie)
+ * et menu burger en mobile (< 768px). Composant client car le menu mobile
+ * a besoin d'un état ouvert/fermé.
+ */
 export default function Header() {
   const [open, setOpen] = useState(false);
 

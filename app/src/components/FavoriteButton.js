@@ -3,6 +3,13 @@
 import { useFavorites } from "@/context/FavoritesContext";
 import styles from "./FavoriteButton.module.css";
 
+/**
+ * Bouton cœur qui ajoute/retire un logement des favoris (FavoritesContext).
+ * L'état est exposé aux technologies d'assistance via aria-pressed et un
+ * libellé qui change selon l'état.
+ * @param {Object} props
+ * @param {Object} props.property - Logement complet (stocké tel quel dans les favoris pour pouvoir réafficher la carte sans rappeler l'API).
+ */
 export default function FavoriteButton({ property }) {
   const { isFavorite, toggleFavorite } = useFavorites();
   const active = isFavorite(property.id);

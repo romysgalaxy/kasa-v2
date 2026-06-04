@@ -5,6 +5,11 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import styles from "./page.module.css";
 
+/**
+ * Page de connexion : formulaire email + mot de passe (champs contrôlés).
+ * En cas de succès, la session est mémorisée (AuthContext) et l'utilisateur
+ * est redirigé vers l'accueil ; sinon un message d'erreur est affiché.
+ */
 export default function ConnexionPage() {
   const router = useRouter();
   const { login } = useAuth();
@@ -13,6 +18,11 @@ export default function ConnexionPage() {
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
+  /**
+   * Soumet le formulaire : délègue l'appel API au contexte et traduit
+   * l'échec en message utilisateur.
+   * @param {import("react").FormEvent<HTMLFormElement>} event
+   */
   async function handleSubmit(event) {
     event.preventDefault();
     setError("");

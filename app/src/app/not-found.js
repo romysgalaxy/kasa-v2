@@ -5,6 +5,10 @@ export const metadata = {
   title: "Page introuvable — Kasa",
 };
 
+/**
+ * Page 404 personnalisée. Convention Next : ce fichier (not-found.js à la
+ * racine de app/) est rendu pour toute route inconnue ou via notFound().
+ */
 export default function NotFound() {
   return (
     <main className={styles.main}>

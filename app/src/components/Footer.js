@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./Footer.module.css";
 
+/** Pied de page : logo (lien vers l'accueil) et mention de copyright. */
 export default function Footer() {
   return (
     <footer className={styles.footer}>

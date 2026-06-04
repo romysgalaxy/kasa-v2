@@ -12,6 +12,13 @@ import {
 const AuthContext = createContext(null);
 const STORAGE_KEY = "kasa:auth";
 
+/**
+ * Fournit la session de connexion à toute l'application (montée dans
+ * layout.js). Le couple { token JWT, user } renvoyé par l'API est persisté
+ * dans le localStorage (clé "kasa:auth") pour survivre aux rechargements.
+ * @param {Object} props
+ * @param {import("react").ReactNode} props.children
+ */
 export function AuthProvider({ children }) {
   // { token, user } ou null si déconnecté.
   const [auth, setAuth] = useState(null);
@@ -38,9 +45,15 @@ export function AuthProvider({ children }) {
     else localStorage.removeItem(STORAGE_KEY);
   }, [auth, hydrated]);
 
-  // Appelle POST /auth/login (proxifié vers l'API Express par les rewrites de
-  // next.config.mjs — on reste donc en same-origin, pas de CORS). Jette une
-  // Error avec `.status` en cas d'échec, comme les services de l'API.
+  /**
+   * Connecte l'utilisateur : POST /auth/login (proxifié vers l'API Express
+   * par les rewrites de next.config.mjs — on reste donc en same-origin, pas
+   * de CORS), puis mémorise { token, user } en cas de succès.
+   * @param {string} email
+   * @param {string} password
+   * @returns {Promise<Object>} L'utilisateur connecté (id, name, email, role).
+   * @throws {Error & {status: number}} Erreur avec `.status` HTTP (401 = identifiants invalides), comme les services de l'API.
+   */
   const login = useCallback(async (email, password) => {
     const res = await fetch("/auth/login", {
       method: "POST",
@@ -57,6 +70,7 @@ export function AuthProvider({ children }) {
     return data.user;
   }, []);
 
+  /** Déconnecte l'utilisateur (l'effet de persistance purge le localStorage). */
   const logout = useCallback(() => setAuth(null), []);
 
   // useMemo : on ne recrée l'objet de contexte que si une valeur change.
@@ -74,6 +88,12 @@ export function AuthProvider({ children }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
+/**
+ * Hook d'accès à la session : { user, token, login, logout, hydrated }.
+ * `user`/`token` valent null tant que personne n'est connecté.
+ * @returns {{user: Object|null, token: string|null, login: (email: string, password: string) => Promise<Object>, logout: () => void, hydrated: boolean}}
+ * @throws {Error} Si appelé hors d'un <AuthProvider>.
+ */
 export function useAuth() {
   const ctx = useContext(AuthContext);
   if (!ctx) {

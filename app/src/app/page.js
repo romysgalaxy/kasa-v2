@@ -18,6 +18,10 @@ const steps = [
   },
 ];
 
+/**
+ * Page d'accueil (Server Component) : bannière héro, grille des logements
+ * récupérés depuis l'API côté serveur, et section "Comment ça marche ?".
+ */
 export default async function Home() {
   const properties = await getProperties();
 

@@ -12,6 +12,13 @@ import {
 const FavoritesContext = createContext(null);
 const STORAGE_KEY = "kasa:favorites";
 
+/**
+ * Fournit l'état global des favoris à toute l'application (montée dans
+ * layout.js). Les favoris sont 100% côté client, persistés dans le
+ * localStorage (clé "kasa:favorites") : aucun compte n'est nécessaire.
+ * @param {Object} props
+ * @param {import("react").ReactNode} props.children
+ */
 export function FavoritesProvider({ children }) {
   const [favorites, setFavorites] = useState([]);
   // Tant que le localStorage n'est pas lu, on évite d'afficher un état "vide"
@@ -39,8 +46,12 @@ export function FavoritesProvider({ children }) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
   }, [favorites, hydrated]);
 
-  // useCallback : la fonction garde la même référence entre les rendus.
-  // (setState fonctionnel => aucune dépendance nécessaire)
+  /**
+   * Ajoute le logement aux favoris s'il n'y est pas, le retire sinon.
+   * useCallback : la fonction garde la même référence entre les rendus.
+   * (setState fonctionnel => aucune dépendance nécessaire)
+   * @param {Object} property - Logement complet (objet stocké tel quel).
+   */
   const toggleFavorite = useCallback((property) => {
     setFavorites((list) =>
       list.some((p) => p.id === property.id)
@@ -49,6 +60,11 @@ export function FavoritesProvider({ children }) {
     );
   }, []);
 
+  /**
+   * Indique si un logement est dans les favoris.
+   * @param {string} id - Identifiant du logement.
+   * @returns {boolean}
+   */
   const isFavorite = useCallback(
     (id) => favorites.some((p) => p.id === id),
     [favorites]
@@ -69,6 +85,11 @@ export function FavoritesProvider({ children }) {
   );
 }
 
+/**
+ * Hook d'accès aux favoris : { favorites, toggleFavorite, isFavorite, hydrated }.
+ * @returns {{favorites: Object[], toggleFavorite: (property: Object) => void, isFavorite: (id: string) => boolean, hydrated: boolean}}
+ * @throws {Error} Si appelé hors d'un <FavoritesProvider>.
+ */
 export function useFavorites() {
   const ctx = useContext(FavoritesContext);
   if (!ctx) {

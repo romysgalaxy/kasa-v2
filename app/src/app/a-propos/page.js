@@ -13,6 +13,7 @@ const mission = [
   "Favoriser des échanges humains et chaleureux entre hôtes et voyageurs",
 ];
 
+/** Page "À propos" : présentation de Kasa et de sa mission (contenu statique). */
 export default function AProposPage() {
   return (
     <main className={styles.main}>

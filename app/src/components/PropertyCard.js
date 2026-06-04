@@ -3,6 +3,12 @@ import Link from "next/link";
 import FavoriteButton from "./FavoriteButton";
 import styles from "./PropertyCard.module.css";
 
+/**
+ * Carte logement (vignette cliquable) utilisée sur l'accueil et les favoris :
+ * photo de couverture, titre, localisation, prix et bouton favori en overlay.
+ * @param {Object} props
+ * @param {Object} props.property - Logement à afficher (id, title, cover, location, price_per_night).
+ */
 export default function PropertyCard({ property }) {
   const href = `/logement/${property.id}`;
 
