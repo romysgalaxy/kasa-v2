@@ -12,6 +12,14 @@ import {
 const AuthContext = createContext(null);
 const STORAGE_KEY = "kasa:auth";
 
+// Mode mock (NEXT_PUBLIC_MOCK_DATA=1) : site déployé sans back-end hébergé
+// (cf. consignes). La connexion est simulée côté client avec un compte de
+// démonstration — mêmes comportements que l'API (succès ou erreur 401).
+const USE_MOCKS = process.env.NEXT_PUBLIC_MOCK_DATA === "1";
+const MOCK_EMAIL = "test@kasa.fr";
+const MOCK_PASSWORD = "Kasa#2026!Test";
+const MOCK_USER = { id: 13, name: "Test User", email: MOCK_EMAIL, role: "client" };
+
 /**
  * Fournit la session de connexion à toute l'application (montée dans
  * layout.js). Le couple { token JWT, user } renvoyé par l'API est persisté
@@ -55,6 +63,15 @@ export function AuthProvider({ children }) {
    * @throws {Error & {status: number}} Erreur avec `.status` HTTP (401 = identifiants invalides), comme les services de l'API.
    */
   const login = useCallback(async (email, password) => {
+    if (USE_MOCKS) {
+      if (email !== MOCK_EMAIL || password !== MOCK_PASSWORD) {
+        const err = new Error("invalid credentials");
+        err.status = 401;
+        throw err;
+      }
+      setAuth({ token: "mock-demo-token", user: MOCK_USER });
+      return MOCK_USER;
+    }
     const res = await fetch("/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

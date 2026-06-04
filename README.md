@@ -87,3 +87,12 @@ npm run build     # build de production
 ### Réinitialiser la base de données
 
 Arrêter l'API, supprimer `api/data/kasa.sqlite3`, puis relancer : le schéma est recréé et les logements rechargés depuis `api/data/properties.json`. (Le compte de démonstration devra être recréé via `POST /auth/register`.)
+
+## Déploiement (Vercel)
+
+Le back-end (serveur persistant + SQLite sur disque) n'est pas hébergé : conformément aux consignes, la version en ligne fonctionne en **mode mock**. Avec la variable d'environnement `NEXT_PUBLIC_MOCK_DATA=1` :
+
+- les logements proviennent d'un snapshot des réponses réelles de l'API (`app/src/lib/mock/properties.json`) ;
+- la connexion est simulée côté client avec le compte de démonstration (`test@kasa.fr` / `Kasa#2026!Test`), y compris le message d'erreur en cas d'identifiants invalides.
+
+Déploiement : projet Vercel pointé sur le dossier `app/` avec `NEXT_PUBLIC_MOCK_DATA=1` dans les variables d'environnement. En local, la variable n'est pas définie et l'application utilise la vraie API.

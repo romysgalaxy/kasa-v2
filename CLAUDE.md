@@ -28,6 +28,7 @@ The frontend talks to the backend in two ways depending on where the code runs (
 - `npm run test:watch` — Vitest in watch mode
 - Run a single test file: `npx vitest run src/components/Carousel.test.js`
 - Env var: `API_URL` (default `http://localhost:3000`) in `app/.env.local`.
+- **Mock mode** (`NEXT_PUBLIC_MOCK_DATA=1`): used for the Vercel deployment (no hosted backend). `lib/api.js` serves `src/lib/mock/properties.json` (a snapshot of real API responses) instead of fetching, and `AuthContext` simulates login client-side (only `test@kasa.fr` / `Kasa#2026!Test` works, wrong credentials get the 401 path). Locally the variable is unset → real API. To refresh the snapshot, re-run the capture against a running API (loop `GET /api/properties/:id` for each id in `GET /api/properties`).
 
 ## How the two parts connect
 
